@@ -1,13 +1,12 @@
 package br.com.aleferamos.BookStore.controllers;
 
+import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.services.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("pessoa")
@@ -16,8 +15,23 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @PostMapping
     public ResponseEntity<Long> salvar(@RequestBody PessoaFormDto pessoaFormDto){
+        pessoaFormDto.getUsuario().setSenha(encoder.encode(pessoaFormDto.getUsuario().getSenha()));
         return ResponseEntity.ok(pessoaService.save(pessoaFormDto));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<PessoaDto> buscar(@PathVariable Long id){
+        return ResponseEntity.ok(pessoaService.findPessoaById(id));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id){
+        pessoaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
