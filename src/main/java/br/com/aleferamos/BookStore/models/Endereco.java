@@ -2,6 +2,7 @@ package br.com.aleferamos.BookStore.models;
 
 import br.com.aleferamos.BookStore.controllers.dto.endereco.EnderecoFormDto;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "endereco")
 @Getter
+@NoArgsConstructor
 public class Endereco extends Entidade {
 
     private String endereco;
