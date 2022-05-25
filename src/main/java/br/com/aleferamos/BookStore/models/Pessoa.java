@@ -1,6 +1,7 @@
 package br.com.aleferamos.BookStore.models;
 
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Pessoa extends Entidade {
 
     private String nome;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "pessoa_usuario"))
     private Usuario usuario;

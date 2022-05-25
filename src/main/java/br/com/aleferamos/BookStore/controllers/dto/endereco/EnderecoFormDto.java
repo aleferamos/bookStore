@@ -16,10 +16,16 @@ public class EnderecoFormDto {
 
     private int numero;
 
+    private String cidade;
+
+    private String estado;
+
     public EnderecoFormDto(Endereco endereco) {
         this.endereco = endereco.getEndereco();
         this.cep = endereco.getCep();
         this.complemento = endereco.getComplemento();
         this.numero = endereco.getNumero();
+        this.cidade = endereco.getCidade();
+        this.estado = endereco.getEstado();
     }
 }

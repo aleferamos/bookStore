@@ -2,6 +2,7 @@ package br.com.aleferamos.BookStore.models;
 
 import br.com.aleferamos.BookStore.Utils.Enum.PerfilUsuarioEnum;
 import br.com.aleferamos.BookStore.controllers.dto.usuario.UsuarioFormDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +18,6 @@ public class Usuario extends Entidade {
     private String email;
 
     private String senha;
-
     private PerfilUsuarioEnum perfil;
 
     public Usuario(UsuarioFormDto usuarioFormDto) {

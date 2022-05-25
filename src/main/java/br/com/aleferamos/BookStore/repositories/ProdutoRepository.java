@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.produto.ProdutoDto(p.codigoBarra, p.preco) FROM Produto p WHERE p.id = :id")
+    @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.produto.ProdutoDto(p.codigoBarra) FROM Produto p WHERE p.id = :id")
     Optional<ProdutoDto> findProdutoById(Long id);
 
 

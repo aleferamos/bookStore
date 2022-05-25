@@ -14,17 +14,20 @@ import javax.persistence.Table;
 public class Endereco extends Entidade {
 
     private String endereco;
-
     private String cep;
-
     private String complemento;
-
     private int numero;
+
+    private String cidade;
+
+    private String estado;
 
     public Endereco(EnderecoFormDto endereco) {
         this.endereco = endereco.getEndereco();
         this.cep = endereco.getCep();
         this.complemento = endereco.getComplemento();
         this.numero = endereco.getNumero();
+        this.cidade = endereco.getCidade();
+        this.estado = endereco.getEstado();
     }
 }
