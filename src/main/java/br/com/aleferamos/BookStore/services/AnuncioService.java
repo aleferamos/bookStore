@@ -1,17 +1,12 @@
 package br.com.aleferamos.BookStore.services;
 
-import br.com.aleferamos.BookStore.controllers.dto.AnuncioFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
-import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
-import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
-import br.com.aleferamos.BookStore.exceptions.RegistroNaoEncontradoException;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
 import br.com.aleferamos.BookStore.models.Anuncio;
 import br.com.aleferamos.BookStore.repositories.AnuncioRepository;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Service

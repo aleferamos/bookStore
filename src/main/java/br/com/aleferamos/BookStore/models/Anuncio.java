@@ -1,18 +1,11 @@
 package br.com.aleferamos.BookStore.models;
 
-import br.com.aleferamos.BookStore.controllers.dto.AnuncioFormDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "anuncio")
 @NoArgsConstructor
 public class Anuncio extends Entidade {
@@ -29,6 +22,15 @@ public class Anuncio extends Entidade {
 
     private int curtida;
 
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "id_livro", foreignKey = @ForeignKey(name = "anuncio_livro"))
+    private Livro livro;
+
+    @OneToOne
+    @JoinColumn(name = "id_pessoa", foreignKey = @ForeignKey(name = "anuncio_pessoa"))
+    private Pessoa pessoa;
+
+
     public Anuncio(String descricao, String nomeImagem, LocalDate data, LocalDate dataModificacao, Double preco, Livro livro, Pessoa pessoa) {
         this.descricao = descricao;
         this.nomeImagem = nomeImagem;
@@ -40,12 +42,67 @@ public class Anuncio extends Entidade {
         this.pessoa = pessoa;
     }
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_livro", foreignKey = @ForeignKey(name = "anuncio_livro"))
-    private Livro livro;
+    public String getDescricao() {
+        return descricao;
+    }
 
-    @OneToOne
-    @JoinColumn(name = "id_pessoa", foreignKey = @ForeignKey(name = "anuncio_pessoa"))
-    private Pessoa pessoa;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalDate getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public int getCurtida() {
+        return curtida;
+    }
+
+    public void setCurtida(int curtida) {
+        this.curtida = curtida;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 }

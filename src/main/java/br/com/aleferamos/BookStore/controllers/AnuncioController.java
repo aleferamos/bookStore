@@ -1,6 +1,5 @@
 package br.com.aleferamos.BookStore.controllers;
 
-import br.com.aleferamos.BookStore.controllers.dto.AnuncioFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
 import br.com.aleferamos.BookStore.models.Anuncio;
 import br.com.aleferamos.BookStore.services.AnuncioService;

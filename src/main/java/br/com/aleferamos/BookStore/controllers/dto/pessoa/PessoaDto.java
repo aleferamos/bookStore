@@ -6,10 +6,10 @@ import br.com.aleferamos.BookStore.controllers.dto.usuario.UsuarioDto;
 import br.com.aleferamos.BookStore.models.Endereco;
 import br.com.aleferamos.BookStore.models.Usuario;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 public class PessoaDto {
 
     private Long id;
@@ -24,5 +24,47 @@ public class PessoaDto {
         this.nome = nome;
         this.usuario = new UsuarioDto(usuario);
         this.endereco = new EnderecoDto(endereco);
+    }
+
+    @Override
+    public String toString() {
+        return "PessoaDto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", usuario=" + usuario +
+                ", endereco=" + endereco +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public UsuarioDto getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDto usuario) {
+        this.usuario = usuario;
+    }
+
+    public EnderecoDto getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDto endereco) {
+        this.endereco = endereco;
     }
 }

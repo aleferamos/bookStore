@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LIVRO")
-@Getter
 @NoArgsConstructor
 public class Livro extends Entidade {
 
@@ -39,5 +38,53 @@ public class Livro extends Entidade {
         this.edicao = livroFormDto.getEdicao();
         this.anoPublicacao = livroFormDto.getAnoPublicacao();
         this.produto = new Produto(livroFormDto.getProduto());
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public int getNumeroPaginas() {
+        return numeroPaginas;
+    }
+
+    public void setNumeroPaginas(int numeroPaginas) {
+        this.numeroPaginas = numeroPaginas;
+    }
+
+    public String getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public int getAnoPublicacao() {
+        return anoPublicacao;
+    }
+
+    public void setAnoPublicacao(int anoPublicacao) {
+        this.anoPublicacao = anoPublicacao;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

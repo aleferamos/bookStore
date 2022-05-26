@@ -2,6 +2,7 @@ package br.com.aleferamos.BookStore.services;
 
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
+import br.com.aleferamos.BookStore.exceptions.RegistroNaoEncontradoException;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
 import br.com.aleferamos.BookStore.models.Pessoa;
 import br.com.aleferamos.BookStore.repositories.PessoaRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @Service
 public class PessoaService {
@@ -31,10 +33,11 @@ public class PessoaService {
     }
 
     public PessoaDto findPessoaById(Long id){
-        return pessoaRepository.findPessoaById(id);
+        return pessoaRepository.findPessoaById(id).orElseThrow(() -> new RegistroNaoEncontradoException("pessoa.NaoEncontrada"));
     }
 
     public void delete(Long id){
+
         var pessoaDelete = modelMapper.map(findPessoaById(id), Pessoa.class);
         pessoaRepository.delete(pessoaDelete);
     }

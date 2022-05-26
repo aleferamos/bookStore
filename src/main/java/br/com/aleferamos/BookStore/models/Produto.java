@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUTO")
-@Getter
 @NoArgsConstructor
 public class Produto extends Entidade{
 
@@ -21,4 +20,11 @@ public class Produto extends Entidade{
         this.codigoBarra = produtoFormDto.getCodigoBarra();
     }
 
+    public String getCodigoBarra() {
+        return codigoBarra;
+    }
+
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
+    }
 }

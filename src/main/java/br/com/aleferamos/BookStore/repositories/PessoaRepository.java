@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
     @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto(p.id, p.nome, p.usuario, p.endereco) " +
             "FROM Pessoa p WHERE p.id = :id")
-    PessoaDto findPessoaById(Long id);
+    Optional<PessoaDto> findPessoaById(Long id);
 
     @Query("SELECT DISTINCT CASE " +
             "WHEN COUNT(pessoa) > 0 THEN true " +

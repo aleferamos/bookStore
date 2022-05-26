@@ -1,4 +1,4 @@
-package br.com.aleferamos.BookStore.controllers.dto;
+package br.com.aleferamos.BookStore.controllers.dto.anuncio;
 
 import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;

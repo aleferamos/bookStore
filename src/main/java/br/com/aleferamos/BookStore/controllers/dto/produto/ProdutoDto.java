@@ -3,7 +3,6 @@ package br.com.aleferamos.BookStore.controllers.dto.produto;
 import br.com.aleferamos.BookStore.models.Produto;
 import lombok.Getter;
 
-@Getter
 public class ProdutoDto {
 
     private Long id;
@@ -16,5 +15,21 @@ public class ProdutoDto {
     public ProdutoDto(Produto produto) {
         this.id = produto.getId();
         this.codigoBarra = produto.getCodigoBarra();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCodigoBarra() {
+        return codigoBarra;
+    }
+
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
     }
 }
