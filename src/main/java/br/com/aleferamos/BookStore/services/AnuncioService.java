@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -41,8 +43,8 @@ public class AnuncioService {
 
     }
 
-    public Page<AnuncioDto> findAll(Pageable pageable){
-       return anuncioRepository.findAllAnuncio(pageable);
+    public Page<AnuncioDto> findAll(Pageable pageable, String nome){
+       return anuncioRepository.findAllAnuncio(pageable, nome);
     }
 
     private String uploadFile(MultipartFile file){
