@@ -1,7 +1,6 @@
 package br.com.aleferamos.BookStore.repositories;
 
 import br.com.aleferamos.BookStore.controllers.dto.produto.ProdutoDto;
-import br.com.aleferamos.BookStore.controllers.dto.produto.ProdutoFormDto;
 import br.com.aleferamos.BookStore.models.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

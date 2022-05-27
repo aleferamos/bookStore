@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class ErroDto {
-
     private String erro;
     private String propriedade;
 

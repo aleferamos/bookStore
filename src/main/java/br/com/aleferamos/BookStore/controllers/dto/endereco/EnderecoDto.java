@@ -1,22 +1,15 @@
 package br.com.aleferamos.BookStore.controllers.dto.endereco;
 
 import br.com.aleferamos.BookStore.models.Endereco;
-import lombok.Getter;
 
 public class EnderecoDto {
 
     private Long id;
-
     private String endereco;
-
     private String cep;
-
     private String complemento;
-
     private int numero;
-
     private String cidade;
-
     private String estado;
 
 

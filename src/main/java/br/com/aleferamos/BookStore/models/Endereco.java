@@ -16,9 +16,7 @@ public class Endereco extends Entidade {
     private String cep;
     private String complemento;
     private int numero;
-
     private String cidade;
-
     private String estado;
 
     public Endereco(EnderecoFormDto endereco) {

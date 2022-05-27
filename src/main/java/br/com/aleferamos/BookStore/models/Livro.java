@@ -1,8 +1,6 @@
 package br.com.aleferamos.BookStore.models;
 
 import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

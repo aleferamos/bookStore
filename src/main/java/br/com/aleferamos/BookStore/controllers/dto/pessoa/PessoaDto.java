@@ -5,18 +5,11 @@ import br.com.aleferamos.BookStore.controllers.dto.usuario.UsuarioDto;
 
 import br.com.aleferamos.BookStore.models.Endereco;
 import br.com.aleferamos.BookStore.models.Usuario;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 public class PessoaDto {
 
     private Long id;
     private String nome;
-
     private UsuarioDto usuario;
-
     private EnderecoDto endereco;
 
     public PessoaDto(Long id, String nome, Usuario usuario, Endereco endereco) {

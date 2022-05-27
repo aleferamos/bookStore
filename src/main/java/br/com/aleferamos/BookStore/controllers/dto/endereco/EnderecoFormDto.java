@@ -2,21 +2,14 @@ package br.com.aleferamos.BookStore.controllers.dto.endereco;
 
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
 import br.com.aleferamos.BookStore.models.Endereco;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 public class EnderecoFormDto {
 
     private String endereco;
-
     private String cep;
-
     private String complemento;
-
     private Integer numero;
-
     private String cidade;
-
     private String estado;
 
     public EnderecoFormDto(String endereco, String cep, String complemento, int numero, String cidade, String estado) {

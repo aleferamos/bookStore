@@ -8,15 +8,12 @@ import br.com.aleferamos.BookStore.models.Pessoa;
 import br.com.aleferamos.BookStore.repositories.PessoaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 @Service
 public class PessoaService {
-
 
     @Autowired
     private PessoaRepository pessoaRepository;

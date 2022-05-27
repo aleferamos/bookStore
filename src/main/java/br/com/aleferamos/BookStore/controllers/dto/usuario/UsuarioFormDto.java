@@ -2,20 +2,10 @@ package br.com.aleferamos.BookStore.controllers.dto.usuario;
 
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
 import br.com.aleferamos.BookStore.models.Usuario;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Required;
-
-import javax.validation.constraints.NotBlank;
-
 public class UsuarioFormDto {
 
     private Long id;
-
     private String email;
-
     private String senha;
 
     public UsuarioFormDto(Usuario usuario) {
