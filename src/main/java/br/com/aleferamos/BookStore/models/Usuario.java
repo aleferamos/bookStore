@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-@NoArgsConstructor
 public class Usuario extends Entidade {
 
     private String email;
@@ -21,6 +20,9 @@ public class Usuario extends Entidade {
         this.email = usuarioFormDto.getEmail();
         this.senha = usuarioFormDto.getSenha();
         this.perfil = PerfilUsuarioEnum.USER;
+    }
+
+    public Usuario() {
     }
 
     @Override

@@ -8,6 +8,7 @@ import br.com.aleferamos.BookStore.models.Pessoa;
 import br.com.aleferamos.BookStore.repositories.PessoaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,9 +21,15 @@ public class PessoaService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Transactional
     public Long save(PessoaFormDto pessoaFormDto){
         var pessoaSave = pessoaRepository.save(new Pessoa(pessoaFormDto));
+
+        pessoaSave.getUsuario().setSenha(encoder.encode(pessoaSave.getUsuario().getSenha()));
+
         if(pessoaRepository.existEmail(pessoaSave.getUsuario().getEmail(), pessoaSave.getUsuario().getId())){
             throw new RegraDeNegocioException("pessoa.jaExist");
         }
@@ -34,8 +41,6 @@ public class PessoaService {
     }
 
     public void delete(Long id){
-
-        var pessoaDelete = modelMapper.map(findPessoaById(id), Pessoa.class);
-        pessoaRepository.delete(pessoaDelete);
+        pessoaRepository.delete(modelMapper.map(findPessoaById(id), Pessoa.class));
     }
 }

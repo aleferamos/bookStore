@@ -23,6 +23,9 @@ public class EnderecoDto {
         this.estado = endereco.getEstado();
     }
 
+    public EnderecoDto() {
+    }
+
     @Override
     public String toString() {
         return "EnderecoDto{" +

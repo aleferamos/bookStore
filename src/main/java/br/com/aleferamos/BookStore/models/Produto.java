@@ -7,11 +7,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUTO")
-@NoArgsConstructor
 public class Produto extends Entidade{
 
     @Column(name = "codigo_barra")
     private String codigoBarra;
+
+    public Produto() {
+    }
 
     public Produto(ProdutoFormDto produtoFormDto) {
         this.codigoBarra = produtoFormDto.getCodigoBarra();

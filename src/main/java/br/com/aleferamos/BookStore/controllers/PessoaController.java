@@ -17,12 +17,8 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @Autowired
-    private PasswordEncoder encoder;
-
     @PostMapping
     public ResponseEntity<Long> salvar(@RequestBody PessoaFormDto pessoaFormDto){
-        pessoaFormDto.getUsuario().setSenha(encoder.encode(pessoaFormDto.getUsuario().getSenha()));
         return ResponseEntity.ok(pessoaService.save(pessoaFormDto));
     }
 

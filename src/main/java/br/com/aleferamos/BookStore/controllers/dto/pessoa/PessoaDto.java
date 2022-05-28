@@ -12,6 +12,9 @@ public class PessoaDto {
     private UsuarioDto usuario;
     private EnderecoDto endereco;
 
+    public PessoaDto() {
+    }
+
     public PessoaDto(Long id, String nome, Usuario usuario, Endereco endereco) {
         this.id = id;
         this.nome = nome;

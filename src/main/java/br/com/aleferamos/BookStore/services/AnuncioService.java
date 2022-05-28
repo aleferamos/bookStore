@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
+@SuppressWarnings("unchecked")
 public class AnuncioService {
 
     @Autowired
@@ -32,15 +33,16 @@ public class AnuncioService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Transactional
-    public Long save(AnuncioFormDto anuncio, MultipartFile file) throws IOException {
+    public Long save(String anuncio, MultipartFile file){
 
-        anuncio.setNomeImagem(bookStoreService.uploadFile(file, "bookstorebr"));
-        anuncio.setData(LocalDate.now());
+      AnuncioFormDto anuncioSave = (AnuncioFormDto) bookStoreService.fromJsonToEntity(anuncio, AnuncioFormDto.class);
 
-//        isEmpty(anuncio);
+        anuncioSave.setNomeImagem(bookStoreService.uploadFile(file, "bookstorebr"));
+        anuncioSave.setData(LocalDate.now());
 
-        return anuncioRepository.save(modelMapper.map(anuncio, Anuncio.class)).getId();
+        return anuncioRepository.save(modelMapper.map(anuncioSave, Anuncio.class)).getId();
 
     }
 
@@ -53,7 +55,8 @@ public class AnuncioService {
     }
 
     public AnuncioDto findAnuncioById(Long id){
-        return anuncioRepository.findAnuncioById(id).orElseThrow(() -> new RegraDeNegocioException("anuncio.naoEncontrado"));
+        return anuncioRepository.findAnuncioById(id)
+                .orElseThrow(() -> new RegraDeNegocioException("anuncio.naoEncontrado"));
     }
 
 

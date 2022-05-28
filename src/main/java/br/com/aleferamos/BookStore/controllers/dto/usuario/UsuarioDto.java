@@ -8,6 +8,17 @@ public class UsuarioDto {
     private String email;
     private String senha;
     private PerfilUsuarioEnum perfil;
+
+    public UsuarioDto(Long id, String email, String senha, PerfilUsuarioEnum perfil) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.perfil = perfil;
+    }
+
+    public UsuarioDto() {
+    }
+
     public UsuarioDto(Usuario usuario) {
         this.email = usuario.getEmail();
         this.senha = usuario.getSenha();

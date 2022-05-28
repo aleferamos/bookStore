@@ -3,21 +3,6 @@ package br.com.aleferamos.BookStore.controllers.dto.pessoa;
 import br.com.aleferamos.BookStore.controllers.dto.endereco.EnderecoFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.usuario.UsuarioFormDto;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
-import br.com.aleferamos.BookStore.models.Endereco;
-import br.com.aleferamos.BookStore.models.Pessoa;
-import br.com.aleferamos.BookStore.models.Usuario;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 
 public class PessoaFormDto {
 
@@ -30,6 +15,13 @@ public class PessoaFormDto {
     private EnderecoFormDto endereco;
 
     public PessoaFormDto() {
+    }
+
+    public PessoaFormDto(Long id, String nome, UsuarioFormDto usuario, EnderecoFormDto endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.endereco = endereco;
     }
 
     public Long getId() {

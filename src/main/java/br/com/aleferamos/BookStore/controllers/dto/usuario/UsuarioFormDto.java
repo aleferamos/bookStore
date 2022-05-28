@@ -50,6 +50,7 @@ public class UsuarioFormDto {
         if(email.isEmpty()){
             throw new RegraDeNegocioException("email.IsEmpty");
         }
+
         this.email = email;
     }
 }

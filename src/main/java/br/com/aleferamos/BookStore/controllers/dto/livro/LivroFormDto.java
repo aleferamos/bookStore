@@ -11,6 +11,20 @@ public class LivroFormDto {
     private String edicao;
     private int anoPublicacao;
     private ProdutoFormDto produto;
+
+    public LivroFormDto(Long id, String titulo, String autor, int numeroPaginas, String edicao, int anoPublicacao, ProdutoFormDto produto) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.numeroPaginas = numeroPaginas;
+        this.edicao = edicao;
+        this.anoPublicacao = anoPublicacao;
+        this.produto = produto;
+    }
+
+    public LivroFormDto() {
+    }
+
     public Long getId() {
         return id;
     }

@@ -8,6 +8,10 @@ public class ProdutoDto {
     public ProdutoDto(String codigoBarra) {
         this.codigoBarra = codigoBarra;
     }
+
+    public ProdutoDto() {
+    }
+
     public ProdutoDto(Produto produto) {
         this.id = produto.getId();
         this.codigoBarra = produto.getCodigoBarra();

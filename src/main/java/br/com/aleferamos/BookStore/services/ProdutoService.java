@@ -24,7 +24,6 @@ public class ProdutoService {
     }
 
     public Long save(ProdutoFormDto produtoFormDto){
-        var produtoSave = new Produto(produtoFormDto);
-        return produtoRepository.save(produtoSave).getId();
+        return produtoRepository.save(new Produto(produtoFormDto)).getId();
     }
 }

@@ -3,17 +3,6 @@ package br.com.aleferamos.BookStore.controllers.dto.anuncio;
 import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
-import br.com.aleferamos.BookStore.models.Livro;
-import br.com.aleferamos.BookStore.models.Pessoa;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 

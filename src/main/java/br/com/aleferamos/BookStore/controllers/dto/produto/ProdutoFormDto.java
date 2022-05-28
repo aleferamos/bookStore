@@ -4,6 +4,15 @@ public class ProdutoFormDto {
 
     private Long id;
     private String codigoBarra;
+
+    public ProdutoFormDto(Long id, String codigoBarra) {
+        this.id = id;
+        this.codigoBarra = codigoBarra;
+    }
+
+    public ProdutoFormDto() {
+    }
+
     public Long getId() {
         return id;
     }

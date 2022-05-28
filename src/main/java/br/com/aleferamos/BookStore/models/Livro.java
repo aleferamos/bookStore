@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LIVRO")
-@NoArgsConstructor
 public class Livro extends Entidade {
 
     @Column(name = "titulo")
@@ -36,6 +35,9 @@ public class Livro extends Entidade {
         this.edicao = livroFormDto.getEdicao();
         this.anoPublicacao = livroFormDto.getAnoPublicacao();
         this.produto = new Produto(livroFormDto.getProduto());
+    }
+
+    public Livro() {
     }
 
     public String getTitulo() {

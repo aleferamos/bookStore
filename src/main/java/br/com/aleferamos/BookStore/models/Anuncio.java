@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "anuncio")
-@NoArgsConstructor
 public class Anuncio extends Entidade {
 
     private String descricao;
@@ -40,6 +39,9 @@ public class Anuncio extends Entidade {
         this.curtida = 0;
         this.livro = livro;
         this.pessoa = pessoa;
+    }
+
+    public Anuncio() {
     }
 
     public String getDescricao() {

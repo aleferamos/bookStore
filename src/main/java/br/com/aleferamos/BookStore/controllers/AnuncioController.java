@@ -1,17 +1,11 @@
 package br.com.aleferamos.BookStore.controllers;
 
+
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
-import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
-import br.com.aleferamos.BookStore.models.Anuncio;
 import br.com.aleferamos.BookStore.services.AnuncioService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +25,13 @@ public class AnuncioController {
     @PostMapping
     public ResponseEntity<Long> salvar(@RequestParam(name = "anuncio") String anuncio,
                                        @RequestParam(name = "imagem") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(anuncioService.save(fromJsonToEntity(anuncio), file));
+
+        return ResponseEntity.ok(anuncioService.save(anuncio, file));
     }
 
     @GetMapping
-    public ResponseEntity<Page<AnuncioDto>> listar(@PageableDefault(size = 6) Pageable pageable, @RequestParam(value = "nome", required = false) String nome){
+    public ResponseEntity<Page<AnuncioDto>> listar(@PageableDefault(size = 6) Pageable pageable,
+                                                   @RequestParam(value = "nome", required = false) String nome){
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));
     }
 
@@ -45,8 +41,4 @@ public class AnuncioController {
         return ResponseEntity.noContent().build();
     }
 
-    private AnuncioFormDto fromJsonToEntity(String json) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, AnuncioFormDto.class);
-    }
 }

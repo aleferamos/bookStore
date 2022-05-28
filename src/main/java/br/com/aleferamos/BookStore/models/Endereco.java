@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "endereco")
-@NoArgsConstructor
 public class Endereco extends Entidade {
 
     private String endereco;
@@ -26,6 +25,9 @@ public class Endereco extends Entidade {
         this.numero = endereco.getNumero();
         this.cidade = endereco.getCidade();
         this.estado = endereco.getEstado();
+    }
+
+    public Endereco() {
     }
 
     public String getEndereco() {
