@@ -66,4 +66,17 @@ public class LivroFormDto {
     public void setProduto(ProdutoFormDto produto) {
         this.produto = produto;
     }
+
+    @Override
+    public String toString() {
+        return "LivroFormDto{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", numeroPaginas=" + numeroPaginas +
+                ", edicao='" + edicao + '\'' +
+                ", anoPublicacao=" + anoPublicacao +
+                ", produto=" + produto +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class AnuncioDto {
 
+    private Long id;
     private String descricao;
     private String nomeImagem;
     private LocalDate data;
@@ -15,8 +16,9 @@ public class AnuncioDto {
     private Livro livro;
     private Pessoa pessoa;
 
-    public AnuncioDto(String descricao, String nomeImagem, LocalDate data, LocalDate dataModificacao, Double preco,
+    public AnuncioDto(Long id ,String descricao, String nomeImagem, LocalDate data, LocalDate dataModificacao, Double preco,
                       int curtida, Livro livro, Pessoa pessoa) {
+        this.id = id;
         this.descricao = descricao;
         this.nomeImagem = nomeImagem;
         this.data = data;
@@ -28,6 +30,14 @@ public class AnuncioDto {
     }
 
     public AnuncioDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -93,4 +103,6 @@ public class AnuncioDto {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+
+
 }

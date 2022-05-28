@@ -1,6 +1,7 @@
 package br.com.aleferamos.BookStore.controllers;
 
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
+import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
 import br.com.aleferamos.BookStore.models.Anuncio;
 import br.com.aleferamos.BookStore.services.AnuncioService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,8 +39,14 @@ public class AnuncioController {
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));
     }
 
-    private Anuncio fromJsonToEntity(String json) throws JsonProcessingException {
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id){
+        anuncioService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    private AnuncioFormDto fromJsonToEntity(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, Anuncio.class);
+        return mapper.readValue(json, AnuncioFormDto.class);
     }
 }

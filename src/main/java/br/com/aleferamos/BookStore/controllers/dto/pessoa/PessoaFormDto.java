@@ -66,4 +66,14 @@ public class PessoaFormDto {
     public void setEndereco(EnderecoFormDto endereco) {
         this.endereco = endereco;
     }
+
+    @Override
+    public String toString() {
+        return "PessoaFormDto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", usuario=" + usuario +
+                ", endereco=" + endereco +
+                '}';
+    }
 }

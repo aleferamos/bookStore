@@ -22,7 +22,7 @@ public class Anuncio extends Entidade {
 
     private int curtida;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_livro", foreignKey = @ForeignKey(name = "anuncio_livro"))
     private Livro livro;
 
@@ -104,5 +104,19 @@ public class Anuncio extends Entidade {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    @Override
+    public String toString() {
+        return "Anuncio{" +
+                "descricao='" + descricao + '\'' +
+                ", nomeImagem='" + nomeImagem + '\'' +
+                ", data=" + data +
+                ", dataModificacao=" + dataModificacao +
+                ", preco=" + preco +
+                ", curtida=" + curtida +
+                ", livro=" + livro +
+                ", pessoa=" + pessoa +
+                '}';
     }
 }
