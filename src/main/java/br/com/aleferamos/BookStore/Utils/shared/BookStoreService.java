@@ -1,48 +1,47 @@
 package br.com.aleferamos.BookStore.Utils.shared;
 
-import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
+import lombok.SneakyThrows;
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.List;
+import java.io.*;
 import java.util.UUID;
 
 @Service
 public class BookStoreService<T> {
 
-    @Autowired
-    private AmazonS3Client awsS3Client;
+    @SneakyThrows
+    public String uploadFile(String pasta, MultipartFile arquivoCarregado){
 
-    public String uploadFile(MultipartFile file, String bucketName){
+        String nomeArquivo = UUID.randomUUID() + "." + StringUtils.getFilenameExtension((arquivoCarregado.getOriginalFilename()));
 
-        String key = UUID.randomUUID() + "." + StringUtils.getFilenameExtension((file.getOriginalFilename()));
+        File novoArquivo = new File(pasta + "/" + nomeArquivo);
 
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(file.getSize());
-        metadata.setContentType(file.getContentType());
+        FileOutputStream saida = new FileOutputStream(novoArquivo);
+
+        copiar(new BufferedInputStream(arquivoCarregado.getInputStream()), saida);
+
+        return nomeArquivo;
+    }
+
+    private void copiar(InputStream origem, OutputStream destino) {
+
+        int bite = 0;
+        byte[] tamanhoMaximo = new byte[1024 * 8];
 
         try {
-            awsS3Client.putObject(bucketName, key, file.getInputStream(), metadata);
-        } catch (IOException e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error occured while uploading the file");
+            while((bite = origem.read(tamanhoMaximo)) >= 0) {
+                destino.write(tamanhoMaximo, 0, bite);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block e.printStackTrace();
         }
-
-        awsS3Client.setObjectAcl(bucketName, key, CannedAccessControlList.PublicRead);
-
-        return key;
     }
 
     public T fromJsonToEntity(String json, Class<T> clazz) {

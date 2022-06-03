@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -35,11 +35,13 @@ public class AnuncioService {
 
 
     @Transactional
-    public Long save(String anuncio, MultipartFile file){
+    public Long save(String anuncio, MultipartFile file) {
 
       AnuncioFormDto anuncioSave = (AnuncioFormDto) bookStoreService.fromJsonToEntity(anuncio, AnuncioFormDto.class);
 
-        anuncioSave.setNomeImagem(bookStoreService.uploadFile(file, "bookstorebr"));
+        anuncioSave.setNomeImagem(bookStoreService
+                .uploadFile("/home/alefep/Documentos/BookStore-angular/src/assets/images_posts", file));
+
         anuncioSave.setData(LocalDate.now());
 
         return anuncioRepository.save(modelMapper.map(anuncioSave, Anuncio.class)).getId();
