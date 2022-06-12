@@ -18,7 +18,7 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
     @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto(a.id, a.descricao, a.nomeImagem," +
             " a.data, a.dataModificacao, a.preco, a.curtida, a.livro, a.pessoa) " +
             "FROM Anuncio a WHERE a.livro.titulo LIKE CONCAT('%',:nome,'%') OR :nome IS NULL")
-    Page<AnuncioDto> findAllAnuncio(Pageable pageable,@Param("nome") String nome);
+    Page<AnuncioDto> findAllAnuncio(Pageable pageable, @Param("nome") String nome);
 
     @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto(a.id, a.descricao, a.nomeImagem, " +
             "a.data, a.dataModificacao, a.preco, a.curtida, a.livro, a.pessoa) FROM Anuncio a WHERE a.id = :id")

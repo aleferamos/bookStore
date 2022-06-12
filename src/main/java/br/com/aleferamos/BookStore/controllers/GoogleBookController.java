@@ -14,7 +14,7 @@ public class GoogleBookController {
     private GoogleBookService googleBookService;
 
     @GetMapping("{nome}")
-    public ResponseEntity<?> buscar(@PathVariable(name = "nome") String nome){
+    public ResponseEntity<?> buscar(@PathVariable(required = false) String nome){
         return googleBookService.getBook(nome);
     }
 }

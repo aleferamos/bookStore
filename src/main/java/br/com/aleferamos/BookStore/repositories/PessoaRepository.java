@@ -16,6 +16,9 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
             "FROM Pessoa p WHERE p.id = :id")
     Optional<PessoaDto> findPessoaById(Long id);
 
+    @Query("SELECT p FROM Pessoa p WHERE p.usuario.email = :email")
+    Optional<Pessoa> findByEmail(String email);
+
     @Query("SELECT DISTINCT CASE " +
             "WHEN COUNT(pessoa) > 0 THEN true " +
             "ELSE false " +
