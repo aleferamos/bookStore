@@ -18,10 +18,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class AutenticacaoService implements UserDetailsService {
 
+
+
     private UsuarioService usuarioService;
 
-    @Value("${jwt.secret}")
-    private String secret;
+    @Autowired
+    private AppKeyService appKeyService;
 
     @Value("${jwt.expiration}")
     private String expiration;
@@ -44,21 +46,20 @@ public class AutenticacaoService implements UserDetailsService {
         Date hoje = new Date();
         Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 
-
         return Jwts.builder()
                 .setIssuer("Totem TI")
                 .setSubject(usuario.getId().toString())
                 .setIssuedAt(hoje)
                 .claim("nome", usuario.getEmail())
                 .setExpiration(dataExpiracao)
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(SignatureAlgorithm.HS256, appKeyService.getKey("jwt"))
                 .compact();
     }
 
     public boolean isTokenValid(String token) {
         if(token != null) {
             try {
-                Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+                Jwts.parser().setSigningKey(appKeyService.getKey("jwt")).parseClaimsJws(token);
                 return true;
             }catch (Exception e) {
                 return false;
@@ -70,7 +71,7 @@ public class AutenticacaoService implements UserDetailsService {
 
     public Long GetIdUser (String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(secret)
+                .setSigningKey(appKeyService.getKey("jwt"))
                 .parseClaimsJws(token)
                 .getBody();
 
