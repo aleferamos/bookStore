@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.controllers;
 
+import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaAuthenticadDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.services.PessoaService;
@@ -32,4 +33,5 @@ public class PessoaController {
         pessoaService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 }

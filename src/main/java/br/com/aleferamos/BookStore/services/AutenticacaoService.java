@@ -18,8 +18,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class AutenticacaoService implements UserDetailsService {
 
-
-
     private UsuarioService usuarioService;
 
     @Autowired
@@ -47,7 +45,7 @@ public class AutenticacaoService implements UserDetailsService {
         Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 
         return Jwts.builder()
-                .setIssuer("Totem TI")
+                .setIssuer("Alefe")
                 .setSubject(usuario.getId().toString())
                 .setIssuedAt(hoje)
                 .claim("nome", usuario.getEmail())

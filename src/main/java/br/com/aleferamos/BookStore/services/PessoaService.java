@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.services;
 
+import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaAuthenticadDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.exceptions.RegistroNaoEncontradoException;
@@ -34,6 +35,10 @@ public class PessoaService {
             throw new RegraDeNegocioException("pessoa.jaExist");
         }
         return pessoaSave.getId();
+    }
+
+    public PessoaAuthenticadDto findPessoaAuthenticad(Long id){
+        return pessoaRepository.findPessoaAuthenticad(id).orElseThrow(() -> new RegraDeNegocioException("pessoa.NaoEncontrada"));
     }
 
     public PessoaDto findPessoaById(Long id){

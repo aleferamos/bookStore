@@ -22,16 +22,6 @@ public class PessoaDto {
         this.endereco = new EnderecoDto(endereco);
     }
 
-    @Override
-    public String toString() {
-        return "PessoaDto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", usuario=" + usuario +
-                ", endereco=" + endereco +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }

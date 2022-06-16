@@ -62,4 +62,11 @@ public class ResourceExceptionHandler {
         String message = messageSource.getMessage(exception.getMessage(), null, LocaleContextHolder.getLocale());
         return new ErroDto(message);
     }
+
+    @ResponseStatus(code = HttpStatus.FORBIDDEN)
+    @ExceptionHandler(br.com.aleferamos.BookStore.exceptions.UsuarioNaoAutorizadoException.class)
+    public ErroDto handle(br.com.aleferamos.BookStore.exceptions.UsuarioNaoAutorizadoException exception) {
+        String message = messageSource.getMessage(exception.getMessage(), null, LocaleContextHolder.getLocale());
+        return new ErroDto(message);
+    }
 }

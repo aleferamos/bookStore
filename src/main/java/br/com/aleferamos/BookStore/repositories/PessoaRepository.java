@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.repositories;
 
+import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaAuthenticadDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaDto;
 import br.com.aleferamos.BookStore.models.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,9 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
     @Query("SELECT p FROM Pessoa p WHERE p.usuario.email = :email")
     Optional<Pessoa> findByEmail(String email);
+
+    @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaAuthenticadDto(p) FROM Pessoa p WHERE p.usuario.id = :id")
+    Optional<PessoaAuthenticadDto> findPessoaAuthenticad(Long id);
 
     @Query("SELECT DISTINCT CASE " +
             "WHEN COUNT(pessoa) > 0 THEN true " +

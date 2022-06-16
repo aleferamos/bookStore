@@ -1,5 +1,7 @@
 package br.com.aleferamos.BookStore.controllers;
 
+import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
+
 import javax.validation.constraints.NotNull;
 
 public class LoginDTO {
@@ -15,6 +17,9 @@ public class LoginDTO {
     }
 
     public void setEmail(String email) {
+        if(email.isEmpty()){
+            throw new RegraDeNegocioException("email.IsEmpty");
+        }
         this.email = email;
     }
 
@@ -23,6 +28,9 @@ public class LoginDTO {
     }
 
     public void setSenha(String senha) {
+        if(senha.isEmpty()){
+            throw new RegraDeNegocioException("senha.IsEmpty");
+        }
         this.senha = senha;
     }
 
