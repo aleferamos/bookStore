@@ -5,9 +5,13 @@ import br.com.aleferamos.BookStore.controllers.dto.ResetPasswordDTO;
 import br.com.aleferamos.BookStore.models.ResetPasswordToken;
 import br.com.aleferamos.BookStore.models.Usuario;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.commons.mail.*;
+
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Date;
 
@@ -20,35 +24,37 @@ public abstract class AbstractEmailService implements EmailService {
     private String resetPassowdUrl;
 
     public void sendResetPasswordToken(ResetPasswordToken resetPasswordToken)
-            throws JsonProcessingException {
+            throws JsonProcessingException, EmailException {
         SimpleMailMessage msg = this.prepareResetPasswordEmail(resetPasswordToken);
         sendEmail(msg);
     }
 
     protected SimpleMailMessage prepareResetPasswordEmail(ResetPasswordToken resetPasswordToken)
-            throws JsonProcessingException{
+            throws JsonProcessingException, EmailException {
 
         SimpleMailMessage sm = new SimpleMailMessage();
+
+
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+
         Usuario user = resetPasswordToken.getUser();
         sm.setTo(user.getEmail());
         sm.setFrom(smtpSender);
-        sm.setSubject("Reset password");
+        sm.setSubject("Alteração de senha");
         sm.setSentDate(new Date(System.currentTimeMillis()));
-
-        ObjectMapper objectMapper = new ObjectMapper();
 
         ResetPasswordDTO dto = ObjectMapperUtil.map(resetPasswordToken,ResetPasswordDTO.class);
 
         dto.setPassword("newPassword");
         dto.setPasswordConfirm("newPassword");
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Olá, você pediu para fazer um alteração em sua senha? caso sim entre no link abaixo para fazer a alteração, ");
-        sb.append("Caso não foi você fique atento pois alguem está tentando entrar em sua conta! ");
-        sb.append(resetPassowdUrl).append("/").append(dto.getToken());
+        String sb = "Olá, você pediu para fazer um alteração em sua senha? caso sim entre no link abaixo para fazer a alteração, " +
+                "Caso não foi você fique atento pois alguem está tentando entrar em sua conta! " +
+                resetPassowdUrl + "/" + dto.getToken();
 
-        sm.setText(sb.toString());
+
+        sm.setText(sb);
         return sm;
     }
-
 }

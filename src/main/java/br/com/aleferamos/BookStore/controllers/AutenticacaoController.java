@@ -12,8 +12,10 @@ import br.com.aleferamos.BookStore.models.ResetPasswordToken;
 import br.com.aleferamos.BookStore.models.Usuario;
 import br.com.aleferamos.BookStore.services.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -73,7 +75,7 @@ public class AutenticacaoController {
 
     @PostMapping("/forgot-password")
     public ResponseEntity<MessageDTO> findById(@Valid @RequestBody ForgotPasswordDTO dto)
-            throws JsonProcessingException {
+            throws JsonProcessingException, EmailException {
 
         Usuario userFound = usuarioService.buscarPorEmail(dto.getEmail());
 
@@ -86,8 +88,9 @@ public class AutenticacaoController {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Em alguns instantes enviaremos um email para este endereço, ");
-        sb.append("Por favor clique no link que enviamos para fazer a alteração. ");
+        sb.append("Por favor clique no link que enviamos para fazer a alteração. <br>");
         sb.append("Verifique a caixa de spam caso não conste nos emails!");
+
 
         return ResponseEntity.ok().body(new MessageDTO(sb.toString(),
                         HttpStatus.OK.value()
@@ -99,6 +102,7 @@ public class AutenticacaoController {
     public ResponseEntity<MessageDTO> findById(@Valid @RequestBody ResetPasswordDTO dto) {
 
         ResetPasswordToken resetPasswordToken = serviceResetPassword.findByToken(dto.getToken());
+
         if(resetPasswordToken == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(
                     new MessageDTO("Esse link não está valido!","Reset password error", HttpStatus.BAD_REQUEST.value())
@@ -115,10 +119,15 @@ public class AutenticacaoController {
         user.setSenha(dto.getPassword());
         usuarioService.updatePassword(user);
         //clean token to prevent that it will be used more than once
+
         resetPasswordToken.setToken(null);
         serviceResetPassword.update(resetPasswordToken);
 
         return ResponseEntity.ok().body(new MessageDTO("Sua senha foi alterada com sucesso!", HttpStatus.OK.value()));
     }
 
+    @GetMapping("tokenIsValid/{token}")
+    public ResponseEntity<Boolean> tokenIsValid(@PathVariable String token){
+        return ResponseEntity.ok(serviceResetPassword.tokenIsValid(token));
+    }
 }

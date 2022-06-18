@@ -41,7 +41,11 @@ public class ResetPasswordTokenService {
         if(this.findById(obj.getId()) == null) {
             throw new ObjectNotFoundException("Obeject "+ResetPasswordToken.class.getName()+" no found! ID "+obj.getId());
         }
+
         return this.repo.save(obj);
     }
 
+    public Boolean tokenIsValid(String token){
+        return repo.findByToken(token).isPresent();
+    }
 }
