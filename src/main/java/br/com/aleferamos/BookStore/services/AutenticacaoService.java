@@ -18,11 +18,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class AutenticacaoService implements UserDetailsService {
 
+    @Value("${encrypted.secretJwt}")
+    private String secret;
+
     private UsuarioService usuarioService;
-
-    @Autowired
-    private AppKeyService appKeyService;
-
     @Value("${jwt.expiration}")
     private String expiration;
 
@@ -50,14 +49,14 @@ public class AutenticacaoService implements UserDetailsService {
                 .setIssuedAt(hoje)
                 .claim("nome", usuario.getEmail())
                 .setExpiration(dataExpiracao)
-                .signWith(SignatureAlgorithm.HS256, appKeyService.getKey("jwt"))
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
     public boolean isTokenValid(String token) {
         if(token != null) {
             try {
-                Jwts.parser().setSigningKey(appKeyService.getKey("jwt")).parseClaimsJws(token);
+                Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
                 return true;
             }catch (Exception e) {
                 return false;
@@ -69,7 +68,7 @@ public class AutenticacaoService implements UserDetailsService {
 
     public Long GetIdUser (String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(appKeyService.getKey("jwt"))
+                .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
 
