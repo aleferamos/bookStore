@@ -17,7 +17,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("anuncio")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class AnuncioController {
 
     @Autowired
