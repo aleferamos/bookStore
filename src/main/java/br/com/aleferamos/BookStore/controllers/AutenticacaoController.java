@@ -30,24 +30,14 @@ import javax.validation.Valid;
 public class AutenticacaoController {
 
     @Autowired
-    private ResetPasswordTokenService serviceResetPassword;
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private AutenticacaoService autenticacaoService;
 
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
     private PessoaService pessoaService;
 
-    @Autowired
-    EmailService emailService;
-
-    @Value("${auth.reset-password-token-expiration-miliseg}")
-    private Long resetPasswordTokenExpirationMisiseg;
 
     @PostMapping("autenticar")
     public ResponseEntity<TokenDTO> stored(@RequestBody @Valid LoginDTO loginDTO) {
@@ -70,63 +60,5 @@ public class AutenticacaoController {
     @GetMapping("GetUSerAuthenticad")
     public ResponseEntity<PessoaAuthenticadDto> getUserAuthenticad(@RequestParam("token") String token){
         return ResponseEntity.ok(pessoaService.findPessoaAuthenticad(autenticacaoService.GetIdUser(token)));
-    }
-
-    @PostMapping("/forgot-password")
-    public ResponseEntity<MessageDTO> findById(@Valid @RequestBody ForgotPasswordDTO dto)
-            throws JsonProcessingException, EmailException {
-
-        Usuario userFound = usuarioService.buscarPorEmail(dto.getEmail());
-
-        if(userFound == null) {
-            throw new ObjectNotFoundException("Object "+Usuario.class.getName()+" not found! e-mail "+dto.getEmail());
-        }
-
-        ResetPasswordToken resetPasswordToken = usuarioService.generateResetPasswordToken(userFound);
-        emailService.sendResetPasswordToken(resetPasswordToken);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Em alguns instantes enviaremos um email para este endereço, ");
-        sb.append("Por favor clique no link que enviamos para fazer a alteração. <br>");
-        sb.append("Verifique a caixa de spam caso não conste nos emails!");
-
-
-        return ResponseEntity.ok().body(new MessageDTO(sb.toString(),
-                        HttpStatus.OK.value()
-                )
-        );
-    }
-
-    @PostMapping("/reset-password")
-    public ResponseEntity<MessageDTO> findById(@Valid @RequestBody ResetPasswordDTO dto) {
-
-        ResetPasswordToken resetPasswordToken = serviceResetPassword.findByToken(dto.getToken());
-
-        if(resetPasswordToken == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(
-                    new MessageDTO("Esse link não está valido!","Reset password error", HttpStatus.BAD_REQUEST.value())
-            );
-        }
-
-        if(resetPasswordToken.isExpired(resetPasswordTokenExpirationMisiseg)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(
-                    new MessageDTO("Esse link não está valido!","Reset password error", HttpStatus.BAD_REQUEST.value())
-            );
-        }
-
-        Usuario user = resetPasswordToken.getUser();
-        user.setSenha(dto.getPassword());
-        usuarioService.updatePassword(user);
-        //clean token to prevent that it will be used more than once
-
-        resetPasswordToken.setToken(null);
-        serviceResetPassword.update(resetPasswordToken);
-
-        return ResponseEntity.ok().body(new MessageDTO("Sua senha foi alterada com sucesso!", HttpStatus.OK.value()));
-    }
-
-    @GetMapping("tokenIsValid/{token}")
-    public ResponseEntity<Boolean> tokenIsValid(@PathVariable String token){
-        return ResponseEntity.ok(serviceResetPassword.tokenIsValid(token));
     }
 }

@@ -30,7 +30,7 @@ public class AnuncioController {
         return ResponseEntity.ok(anuncioService.save(anuncio, file));
     }
 
-    @GetMapping
+    @GetMapping("listar")
     public ResponseEntity<Page<AnuncioDto>> listar(@PageableDefault(size = 6) Pageable pageable,
                                                    @RequestParam(value = "nome", required = false) String nome){
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));

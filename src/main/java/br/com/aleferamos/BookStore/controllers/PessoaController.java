@@ -18,7 +18,7 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @PostMapping
+    @PostMapping("salvar")
     public ResponseEntity<Long> salvar(@RequestBody PessoaFormDto pessoaFormDto){
         return ResponseEntity.ok(pessoaService.save(pessoaFormDto));
     }
