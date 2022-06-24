@@ -10,17 +10,13 @@ import java.net.*;
 
 @RestController
 @RequestMapping("googlebook")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class GoogleBookController {
 
     @Autowired
     private GoogleBookService googleBookService;
 
     @GetMapping("{nome}")
-    public ResponseEntity<?> buscar(@PathVariable(required = false) String nome) throws IOException {
-
-//
-
+    public ResponseEntity<?> buscar(@PathVariable(required = false) String nome) {
         return googleBookService.getBook(nome);
     }
 
