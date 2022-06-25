@@ -3,6 +3,8 @@ package br.com.aleferamos.BookStore.controllers.dto.anuncio;
 import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDate;
 
 
@@ -21,7 +23,7 @@ public class    AnuncioFormDto {
     private int curtida;
 
     private LivroFormDto livro;
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private PessoaFormDto pessoa;
 
     public AnuncioFormDto() {

@@ -26,7 +26,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/autenticacao")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class AutenticacaoController {
 
     @Autowired
