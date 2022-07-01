@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.models;
 
+import br.com.aleferamos.BookStore.Utils.Enum.StatusAnuncioEnum;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -21,6 +22,8 @@ public class Anuncio extends Entidade {
 
     private int curtida;
 
+    private StatusAnuncioEnum status;
+
     @OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_livro", foreignKey = @ForeignKey(name = "anuncio_livro"))
     private Livro livro;
@@ -39,6 +42,7 @@ public class Anuncio extends Entidade {
         this.curtida = 0;
         this.livro = livro;
         this.pessoa = pessoa;
+        this.status = StatusAnuncioEnum.CREATED;
     }
 
     public Anuncio() {
@@ -90,6 +94,14 @@ public class Anuncio extends Entidade {
 
     public void setCurtida(int curtida) {
         this.curtida = curtida;
+    }
+
+    public StatusAnuncioEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAnuncioEnum status) {
+        this.status = status;
     }
 
     public Livro getLivro() {

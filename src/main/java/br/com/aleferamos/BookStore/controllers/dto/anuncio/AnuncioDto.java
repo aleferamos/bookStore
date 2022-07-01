@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.controllers.dto.anuncio;
 
+import br.com.aleferamos.BookStore.Utils.Enum.StatusAnuncioEnum;
 import br.com.aleferamos.BookStore.models.Livro;
 import br.com.aleferamos.BookStore.models.Pessoa;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class AnuncioDto {
     private LocalDate dataModificacao;
     private Double preco;
     private int curtida;
+    private StatusAnuncioEnum status;
     private Livro livro;
     private Pessoa pessoa;
 
@@ -25,6 +27,7 @@ public class AnuncioDto {
         this.dataModificacao = dataModificacao;
         this.preco = preco;
         this.curtida = curtida;
+        this.status = StatusAnuncioEnum.CREATED;
         this.livro = livro;
         this.pessoa = pessoa;
     }
@@ -86,6 +89,14 @@ public class AnuncioDto {
 
     public void setCurtida(int curtida) {
         this.curtida = curtida;
+    }
+
+    public StatusAnuncioEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAnuncioEnum status) {
+        this.status = status;
     }
 
     public Livro getLivro() {

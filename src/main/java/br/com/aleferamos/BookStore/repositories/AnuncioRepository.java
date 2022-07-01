@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.repositories;
 
+import br.com.aleferamos.BookStore.Utils.Enum.StatusAnuncioEnum;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
 import br.com.aleferamos.BookStore.models.Anuncio;
 import org.springframework.data.domain.Page;
@@ -23,4 +24,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
     @Query("SELECT NEW br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto(a.id, a.descricao, a.nomeImagem, " +
             "a.data, a.dataModificacao, a.preco, a.curtida, a.livro, a.pessoa) FROM Anuncio a WHERE a.id = :id")
     Optional<AnuncioDto> findAnuncioById(Long id);
+
+    Page<Anuncio> findAllByStatus(Pageable pageable, StatusAnuncioEnum status);
 }

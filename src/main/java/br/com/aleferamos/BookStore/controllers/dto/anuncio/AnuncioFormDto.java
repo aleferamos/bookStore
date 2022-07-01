@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.controllers.dto.anuncio;
 
+import br.com.aleferamos.BookStore.Utils.Enum.StatusAnuncioEnum;
 import br.com.aleferamos.BookStore.controllers.dto.livro.LivroFormDto;
 import br.com.aleferamos.BookStore.controllers.dto.pessoa.PessoaFormDto;
 import br.com.aleferamos.BookStore.exceptions.RegraDeNegocioException;
@@ -22,6 +23,8 @@ public class    AnuncioFormDto {
 
     private int curtida;
 
+    private StatusAnuncioEnum status;
+
     private LivroFormDto livro;
     @JsonIgnoreProperties(ignoreUnknown = true)
     private PessoaFormDto pessoa;
@@ -36,6 +39,7 @@ public class    AnuncioFormDto {
         this.dataModificacao = dataModificacao;
         this.preco = preco;
         this.curtida = curtida;
+        this.status = StatusAnuncioEnum.CREATED;
         this.livro = livro;
         this.pessoa = pessoa;
     }
@@ -93,6 +97,14 @@ public class    AnuncioFormDto {
 
     public void setCurtida(int curtida) {
         this.curtida = curtida;
+    }
+
+    public StatusAnuncioEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusAnuncioEnum status) {
+        this.status = status;
     }
 
     public LivroFormDto getLivro() {

@@ -1,5 +1,6 @@
 package br.com.aleferamos.BookStore.services;
 
+import br.com.aleferamos.BookStore.Utils.Enum.StatusAnuncioEnum;
 import br.com.aleferamos.BookStore.Utils.shared.BookStoreService;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
@@ -43,7 +44,7 @@ public class AnuncioService {
                 .uploadFile("/home/alefep/Documentos/BookStore-angular/src/assets/images_posts", file));
 
         anuncioSave.setData(LocalDate.now());
-
+        anuncioSave.setStatus(StatusAnuncioEnum.CREATED);
         return anuncioRepository.save(modelMapper.map(anuncioSave, Anuncio.class)).getId();
 
     }
@@ -59,6 +60,11 @@ public class AnuncioService {
     public AnuncioDto findAnuncioById(Long id){
         return anuncioRepository.findAnuncioById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("anuncio.naoEncontrado"));
+    }
+
+    public Page<AnuncioDto> findAllByStatus(Pageable pageable){
+        return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.CREATED)
+                .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
     }
 
 

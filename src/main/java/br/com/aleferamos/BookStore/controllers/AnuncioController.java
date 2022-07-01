@@ -36,6 +36,11 @@ public class AnuncioController {
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));
     }
 
+    @GetMapping("listar/CREATED")
+    public ResponseEntity<Page<AnuncioDto>> listarStatusCreated(Pageable pageable){
+        return ResponseEntity.ok(anuncioService.findAllByStatus(pageable));
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id){
         anuncioService.delete(id);
