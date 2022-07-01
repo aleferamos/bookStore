@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("pessoa")
-@CrossOrigin(exposedHeaders="Access-Control-Allow-Origin")
 public class PessoaController {
 
     @Autowired
