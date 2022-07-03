@@ -2,7 +2,6 @@ package br.com.aleferamos.BookStore.controllers.dto;
 
 import lombok.Getter;
 
-@Getter
 public class ErroDto {
     private String erro;
     private String propriedade;
@@ -15,5 +14,13 @@ public class ErroDto {
 
     public ErroDto(String erro) {
         this.erro = erro;
+    }
+
+    public String getErro() {
+        return erro;
+    }
+
+    public String getPropriedade() {
+        return propriedade;
     }
 }

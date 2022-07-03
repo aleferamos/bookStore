@@ -11,4 +11,8 @@ public class ForgotPasswordDTO {
     @NotNull
     @Email
     private String email;
+
+    public String getEmail() {
+        return email;
+    }
 }

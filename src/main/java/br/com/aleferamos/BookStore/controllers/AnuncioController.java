@@ -2,6 +2,7 @@ package br.com.aleferamos.BookStore.controllers;
 
 
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
+import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
 import br.com.aleferamos.BookStore.services.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,12 @@ public class AnuncioController {
     @DeleteMapping("{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id){
         anuncioService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/alterarStatus")
+    public ResponseEntity<?> alterarStatus(@RequestParam(name = "id") Long id, @RequestParam(name = "status") Integer status){
+        anuncioService.changeStatus(id, status);
         return ResponseEntity.noContent().build();
     }
 

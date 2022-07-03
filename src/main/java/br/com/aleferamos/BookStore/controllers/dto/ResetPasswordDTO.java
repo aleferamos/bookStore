@@ -24,4 +24,7 @@ public class ResetPasswordDTO {
     @JsonProperty("password_confirm")
     private String passwordConfirm;
 
+    public String getToken() {
+        return token;
+    }
 }

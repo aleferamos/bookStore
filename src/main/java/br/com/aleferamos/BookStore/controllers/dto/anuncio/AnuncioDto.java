@@ -19,7 +19,7 @@ public class AnuncioDto {
     private Pessoa pessoa;
 
     public AnuncioDto(Long id ,String descricao, String nomeImagem, LocalDate data, LocalDate dataModificacao, Double preco,
-                      int curtida, Livro livro, Pessoa pessoa) {
+                      int curtida, StatusAnuncioEnum status, Livro livro, Pessoa pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.nomeImagem = nomeImagem;
@@ -27,7 +27,7 @@ public class AnuncioDto {
         this.dataModificacao = dataModificacao;
         this.preco = preco;
         this.curtida = curtida;
-        this.status = StatusAnuncioEnum.CREATED;
+        this.status = status;
         this.livro = livro;
         this.pessoa = pessoa;
     }

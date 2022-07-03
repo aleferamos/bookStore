@@ -59,12 +59,31 @@ public class AnuncioService {
 
     public AnuncioDto findAnuncioById(Long id){
         return anuncioRepository.findAnuncioById(id)
-                .orElseThrow(() -> new RegraDeNegocioException("anuncio.naoEncontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("anuncio.NaoEncontrado"));
     }
 
     public Page<AnuncioDto> findAllByStatus(Pageable pageable){
         return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.CREATED)
                 .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
+    }
+
+    @Transactional
+    public void changeStatus(Long id, Integer status){
+
+        AnuncioDto anuncio = findAnuncioById(id);
+
+        switch (status){
+            case 1:
+                anuncio.setStatus(StatusAnuncioEnum.AUTHORIZED);
+            break;
+            case 2:
+                anuncio.setStatus(StatusAnuncioEnum.UNAUTHORIZED);
+                break;
+        }
+
+        var a = new AnuncioDto();
+
+        anuncioRepository.save(modelMapper.map(anuncio, Anuncio.class));
     }
 
 

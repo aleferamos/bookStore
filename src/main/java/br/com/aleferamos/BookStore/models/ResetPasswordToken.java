@@ -37,5 +37,7 @@ public class ResetPasswordToken implements Serializable {
         return (dateTimeout.before(new Date()));
     }
 
-
+    public Usuario getUser() {
+        return user;
+    }
 }

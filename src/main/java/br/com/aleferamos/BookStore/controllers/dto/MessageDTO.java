@@ -36,4 +36,24 @@ public class MessageDTO implements Serializable {
     public MessageDTO(String message,Integer status) {
         this.setValues(message, null, status);
     }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getPath() {
+        return path;
+    }
 }
