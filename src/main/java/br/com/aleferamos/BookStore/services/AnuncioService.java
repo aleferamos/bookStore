@@ -62,9 +62,22 @@ public class AnuncioService {
                 .orElseThrow(() -> new RegraDeNegocioException("anuncio.NaoEncontrado"));
     }
 
-    public Page<AnuncioDto> findAllByStatus(Pageable pageable){
-        return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.CREATED)
-                .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
+    public Page<AnuncioDto> findAllByStatus(Pageable pageable, String status){
+        switch (status){
+            case "CREATED":
+                return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.CREATED)
+                        .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
+
+            case "AUTHORIZED":
+                return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.AUTHORIZED)
+                        .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
+            case "UNAUTHORIZED":
+                return anuncioRepository.findAllByStatus(pageable, StatusAnuncioEnum.UNAUTHORIZED)
+                        .map(anuncioConvert -> modelMapper.map(anuncioConvert, AnuncioDto.class));
+            default:
+                return null;
+        }
+
     }
 
     @Transactional
@@ -73,6 +86,9 @@ public class AnuncioService {
         AnuncioDto anuncio = findAnuncioById(id);
 
         switch (status){
+            case 0:
+                anuncio.setStatus(StatusAnuncioEnum.CREATED);
+                break;
             case 1:
                 anuncio.setStatus(StatusAnuncioEnum.AUTHORIZED);
             break;
@@ -80,8 +96,6 @@ public class AnuncioService {
                 anuncio.setStatus(StatusAnuncioEnum.UNAUTHORIZED);
                 break;
         }
-
-        var a = new AnuncioDto();
 
         anuncioRepository.save(modelMapper.map(anuncio, Anuncio.class));
     }

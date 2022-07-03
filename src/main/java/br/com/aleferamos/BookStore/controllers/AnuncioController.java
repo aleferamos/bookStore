@@ -37,9 +37,9 @@ public class AnuncioController {
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));
     }
 
-    @GetMapping("listar/CREATED")
-    public ResponseEntity<Page<AnuncioDto>> listarStatusCreated(Pageable pageable){
-        return ResponseEntity.ok(anuncioService.findAllByStatus(pageable));
+    @GetMapping("listarByStatus")
+    public ResponseEntity<Page<AnuncioDto>> listarStatusCreated(Pageable pageable, @RequestParam(name = "status", required = false) String status){
+        return ResponseEntity.ok(anuncioService.findAllByStatus(pageable, status));
     }
 
     @DeleteMapping("{id}")
