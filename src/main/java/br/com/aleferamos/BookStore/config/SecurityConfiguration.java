@@ -64,7 +64,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/resetPassword/**", "/webjars/**", "/pessoa/salvar", "/autenticacao/validar", "/configuration/**", "/anuncio/listar" ,"/googlebook/**" );
+                .antMatchers("/resetPassword/**",
+                        "/webjars/**",
+                        "/pessoa/salvar",
+                        "/autenticacao/validar",
+                        "/configuration/**",
+                        "/anuncio/listar",
+                        "/anuncio/listarByStatus",
+                        "/googlebook/**",
+                        "/anuncio/buscarPorId/**");
     }
 
 

@@ -37,6 +37,11 @@ public class AnuncioController {
         return ResponseEntity.ok(anuncioService.findAll(pageable, nome));
     }
 
+    @GetMapping("/buscarPorId/{id}")
+    public ResponseEntity<AnuncioDto> buscarPorId(@PathVariable Long id){
+        return ResponseEntity.ok().body(anuncioService.findAnuncioById(id));
+    }
+
     @GetMapping("listarByStatus")
     public ResponseEntity<Page<AnuncioDto>> listarStatusCreated(Pageable pageable, @RequestParam(name = "status", required = false) String status){
         return ResponseEntity.ok(anuncioService.findAllByStatus(pageable, status));
