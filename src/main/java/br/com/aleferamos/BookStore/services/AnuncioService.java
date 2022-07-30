@@ -91,11 +91,15 @@ public class AnuncioService {
                 break;
             case 1:
                 anuncio.setStatus(StatusAnuncioEnum.AUTHORIZED);
-            break;
+                break;
             case 2:
                 anuncio.setStatus(StatusAnuncioEnum.UNAUTHORIZED);
                 break;
+            case 3:
+                anuncio.setStatus(StatusAnuncioEnum.FINALIZED);
         }
+
+        anuncio.setDataModificacao(LocalDate.now());
 
         anuncioRepository.save(modelMapper.map(anuncio, Anuncio.class));
     }
