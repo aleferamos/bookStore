@@ -49,9 +49,6 @@ public class EnderecoFormDto {
     }
 
     public void setCep(String cep) {
-        if(cep.isEmpty()){
-            throw new RegraDeNegocioException("cep.isEmpty");
-        }
         this.cep = cep;
     }
 

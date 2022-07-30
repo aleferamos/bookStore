@@ -41,7 +41,7 @@ public class AnuncioService {
       AnuncioFormDto anuncioSave = (AnuncioFormDto) bookStoreService.fromJsonToEntity(anuncio, AnuncioFormDto.class);
 
         anuncioSave.setNomeImagem(bookStoreService
-                .uploadFile("/home/alefep/Documentos/BookStore-angular/src/assets/images_posts", file));
+                .uploadFile("/home/alefep/Documentos/bookstore-angular/src/assets/images_posts", file));
 
         anuncioSave.setData(LocalDate.now());
         anuncioSave.setStatus(StatusAnuncioEnum.CREATED);
