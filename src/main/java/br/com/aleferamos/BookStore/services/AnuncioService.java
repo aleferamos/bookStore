@@ -16,10 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
-import java.io.*;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -62,6 +60,10 @@ public class AnuncioService {
                 .orElseThrow(() -> new RegraDeNegocioException("anuncio.NaoEncontrado"));
     }
 
+    public List<Anuncio> findByNomeAndRangeCoast(String nome, Double menorPreco, Double maiorPreco){
+        return anuncioRepository.findAnuncioPorNomeEPreco(nome, menorPreco, maiorPreco);
+    }
+
     public Page<AnuncioDto> findAllByStatus(Pageable pageable, String status){
         switch (status){
             case "CREATED":
@@ -77,7 +79,6 @@ public class AnuncioService {
             default:
                 return null;
         }
-
     }
 
     @Transactional
@@ -104,5 +105,16 @@ public class AnuncioService {
         anuncioRepository.save(modelMapper.map(anuncio, Anuncio.class));
     }
 
+
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Double.parseDouble(strNumber);
+            } catch(Exception e) {
+                return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
+            }
+        }
+        else return 0;
+    }
 
 }

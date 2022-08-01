@@ -3,6 +3,7 @@ package br.com.aleferamos.BookStore.controllers;
 
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioDto;
 import br.com.aleferamos.BookStore.controllers.dto.anuncio.AnuncioFormDto;
+import br.com.aleferamos.BookStore.models.Anuncio;
 import br.com.aleferamos.BookStore.services.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -57,6 +59,14 @@ public class AnuncioController {
     public ResponseEntity<?> alterarStatus(@RequestParam(name = "id") Long id, @RequestParam(name = "status") Integer status){
         anuncioService.changeStatus(id, status);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("listarPorNomeEIntervaloDeCusto")
+    public ResponseEntity<List<Anuncio>> findByNomeAndRangeCoast
+            (@RequestParam(name = "nome", required = false) String nome,
+             @RequestParam(name = "maiorPreco", required = false) Double maiorPreco,
+             @RequestParam(name = "menorPreco", required = false) Double menorPreco){
+        return ResponseEntity.ok(anuncioService.findByNomeAndRangeCoast(nome, menorPreco, maiorPreco));
     }
 
 }

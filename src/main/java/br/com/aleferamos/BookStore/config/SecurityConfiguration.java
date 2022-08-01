@@ -72,7 +72,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/anuncio/listar",
                         "/anuncio/listarByStatus",
                         "/googlebook/**",
-                        "/anuncio/buscarPorId/**");
+                        "/anuncio/buscarPorId/**",
+                        "/anuncio/listarPorNomeEIntervaloDeCusto/**");
     }
 
 
